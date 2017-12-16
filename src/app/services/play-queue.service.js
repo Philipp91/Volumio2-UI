@@ -100,6 +100,27 @@ class PlayQueueService {
     return this._queue.lenght;
   }
 
+  isQueued(item) {
+    if (!item) { 
+      return false; 
+    }
+    var removePrefix = function(uri) {
+      if (uri.startsWith("mnt/")) {
+        return uri.substr(4);
+      } else if (uri.startsWith("music-library/")) {
+        return uri.substr(14);
+      }
+      return uri;
+    };
+    var itemUri = removePrefix(item.uri);
+    for (var i = 0; i < this._queue.length; i++) {
+      if (itemUri === removePrefix(this._queue[i].uri)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   init() {
     this.registerListner();
     this.initService();

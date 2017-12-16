@@ -24,6 +24,9 @@ class BrowseController {
     $scope.$on('browseService:fetchEnd', () => {
       this.renderBrowseTable();
     });
+    $scope.$on('playQueueService:pushQueue', () => {
+      this.renderBrowseTable();
+    });
 
     this.initController();
   }
@@ -279,7 +282,11 @@ class BrowseController {
         this.table += `<div class="listWrapper">`;
         list.items.forEach((item, itemIndex) => {
           //Print items
-          this.table += `<div class="itemWrapper"><div class="itemTab">`;
+          if (this.playQueueService.isQueued(item)) {
+            this.table += `<div class="itemWrapper" style="background-color: #42f4f1;"><div class="itemTab">`;
+          } else {
+            this.table += `<div class="itemWrapper"><div class="itemTab">`;
+          }
           if (item.icon || item.albumart) {
           this.table += `<div class="image" id="${item.active ? 'source-active': ''}"
               onclick="${angularThis}.clickListItemByIndex(${listIndex}, ${itemIndex})">`;
