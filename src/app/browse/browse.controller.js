@@ -70,7 +70,7 @@ class BrowseController {
     if (item.type !== 'song' && item.type !== 'webradio' && item.type !== 'mywebradio' && item.type !== 'cuesong' && item.type !== 'album' && item.type !== 'artist' && item.type !== 'cd' && item.type !== 'play-playlist') {
       this.fetchLibrary(item);
     } else if (item.type === 'song' || item.type === 'webradio' || item.type === 'mywebradio' || item.type === 'album' || item.type === 'artist') {
-      this.play(item);
+      this.playQueueService.add(item);
     } else if (item.type === 'cuesong') {
       this.playQueueService.addPlayCue(item);
     } else if (item.type === 'cd') {
