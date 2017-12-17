@@ -721,3 +721,8 @@ span {
   	color: $theme-dark-color;
   }
 }
+
+// Make angular-toastr notifications click-through
+#toast-container {
+    pointer-events: none !important;
+}
